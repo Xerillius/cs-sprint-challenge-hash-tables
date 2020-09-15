@@ -1,10 +1,22 @@
-def intersection(arrays):
-    """
-    YOUR CODE HERE
-    """
-    # Your code here
+from ht import HashTable
 
-    return result
+ht = HashTable(8)
+
+def intersection(arrays):
+    cache = {}
+    matches = []
+    arr_iter = iter(arrays[0])
+    for item in arr_iter:
+        ht.put(str(item), item)
+    for i in range(1,len(arrays)):
+        arr_iter = iter(arrays[i])
+        for item in arr_iter:
+            if ht.get(str(item)):
+                cache[item] = cache.get(item,0) + 1
+    for i in cache:
+        if cache[i] == len(arrays)-1:
+            matches.append(i)
+    return matches
 
 
 if __name__ == "__main__":
